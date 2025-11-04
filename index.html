@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Gentle Note</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<style>
+body {
+  margin:0; padding:0;
+  font-family:'Georgia', serif;
+  background:#ffe6f0; 
+  text-align:center;
+  color:#3f3f3f;
+  overflow-x:hidden;
+}
+.hidden { display:none; }
+
+.envelope {
+  width:300px;
+  height:200px;
+  background:#f0e9d2;
+  border:2px solid #d8c9a9;
+  border-radius:8px;
+  margin:15% auto;
+  cursor:pointer;
+  position:relative;
+  transition: transform .4s;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+.envelope:hover { transform: scale(1.05);}
+.seal {
+  position:absolute;
+  width:60px;
+  height:60px;
+  background:#b42025;
+  border-radius:50%;
+  top:70px;
+  left:50%;
+  transform:translateX(-50%);
+  box-shadow: inset 0 0 8px #6b0b0b,0 0 8px rgba(0,0,0,0.2);
+}
+
+.letter { 
+  display:none; 
+  max-width:650px; 
+  margin:40px auto; 
+  padding:40px; 
+  background:#f5e8c0; 
+  border:1px solid #d9c9a7; 
+  border-radius:6px; 
+  text-align:left; 
+  box-shadow:0 0 15px rgba(0,0,0,0.1); 
+  position:relative;
+  font-family: 'Dancing Script', cursive; 
+  font-size:1.2em;
+  line-height:1.6em;
+}
+.letter::before {
+  content:""; 
+  position:absolute; 
+  top:0; left:0; right:0; bottom:0; 
+  border:2px dashed rgba(0,0,0,0.1); 
+  pointer-events:none;
+}
+
+.button-container { margin-top:30px; }
+.button-container button {
+  padding:12px 25px; 
+  margin:10px; 
+  background-color:#f3e8c8; 
+  border:none; 
+  border-radius:5px; 
+  font-weight:bold; 
+  cursor:pointer; 
+  transition:0.3s;
+}
+.button-container button:hover { background-color:#f9f0d9;}
+
+#chatbox, #randomPage { 
+  display:none; 
+  max-width:600px; 
+  margin:40px auto; 
+  text-align:left; 
+}
+#chatbox input, #chatbox textarea { 
+  width:100%; 
+  padding:10px; 
+  font-size:1em; 
+  margin-top:10px; 
+  border-radius:5px; 
+  border:1px solid #ccc; 
+}
+#chatbox button, #randomPage button { 
+  margin-top:10px; 
+  padding:10px 20px; 
+  border:none; 
+  border-radius:5px; 
+  cursor:pointer; 
+  background-color:#f3e8c8; 
+  font-weight:bold; 
+}
+
+#chatOutput .message, #randomOutput { 
+  background:#fff9f2; 
+  padding:10px 15px; 
+  border-radius:5px; 
+  margin:8px 0; 
+  box-shadow:0 2px 4px rgba(0,0,0,0.1); 
+  white-space: pre-line;
+}
+
+.petal { 
+  position:fixed; 
+  width:18px; 
+  height:18px; 
+  background: radial-gradient(circle at 8px 8px, #ffffff, #e5e5e5); 
+  border-radius:50%; 
+  opacity:0.9; 
+  animation: fall linear infinite;
+}
+@keyframes fall { 
+  to { transform: translateY(110vh) rotate(360deg); opacity:0; } 
+}
+</style>
+</head>
+<body>
+
+<div id="page1">
+  <div class="envelope" id="envelope">
+    <div class="seal"></div>
+  </div>
+
+  <!-- Multi Letters -->
+  <div class="letter" id="letter1">
+    <h2>Hello...</h2>
+    <p>I want to say I’m truly sorry — for my actions and for the hurt they caused you. You did not deserve confusion or discomfort. I care about your peace and your happiness.</p>
+    <div class="button-container">
+      <button onclick="nextLetter(2)">Next</button>
+    </div>
+  </div>
+
+  <div class="letter" id="letter2">
+    <h2>Just a thought...</h2>
+    <p>"Even the softest rain nourishes the deepest roots." I hope this gentle note reminds you that brighter moments are ahead, and you deserve calm and joy every day.</p>
+    <div class="button-container">
+      <button onclick="nextLetter(3)">Next</button>
+    </div>
+  </div>
+
+  <div class="letter" id="letter3">
+    <h2>One more thing...</h2>
+    <p>Your feelings matter. I respect your space, and I am wishing you peaceful, lighter days. Whenever you feel like sharing, or even just need someone to listen, I am here.</p>
+    <div class="button-container">
+      <button onclick="showOptions()">Go Ahead</button>
+    </div>
+  </div>
+</div>
+
+<!-- Chatbox -->
+<div id="chatbox">
+  <h3>Tell me how you feel today:</h3>
+  <input type="text" id="feelingInput" placeholder="Type your emotion (e.g., happy, bored, sad, angry...)">
+  <button onclick="showEmotionResponse()">Submit</button>
+  <div id="chatOutput"></div>
+  <br><button onclick="backToHome()">Back</button>
+</div>
+
+<!-- Random Messages -->
+<div id="randomPage">
+  <h3>Here’s something random for you</h3>
+  <div id="randomOutput" class="message"></div>
+  <button onclick="newRandom()">New message</button>
+  <br><button onclick="backToHome()">Back</button>
+</div>
+
+<script>
+const envelope = document.getElementById('envelope');
+const letters = [document.getElementById('letter1'), document.getElementById('letter2'), document.getElementById('letter3')];
+
+envelope.addEventListener('click', () => { 
+  envelope.style.display='none'; 
+  letters[0].style.display='block'; 
+  launchPetals(); 
+});
+
+function nextLetter(n){
+  letters.forEach(l => l.style.display='none');
+  letters[n-1].style.display='block';
+}
+
+function showOptions(){
+  letters.forEach(l => l.style.display='none');
+  document.getElementById('page1').style.display='block'; 
+  // Show buttons for chat or random
+  let existing = document.querySelector('.button-container.options');
+  if(!existing){
+      const buttonContainer = document.createElement('div');
+      buttonContainer.className='button-container options';
+      buttonContainer.innerHTML=`<button onclick="showChat()">Share how I feel</button>
+                                 <button onclick="showRandom()">Something Random</button>`;
+      document.getElementById('page1').appendChild(buttonContainer);
+  }
+}
+
+function launchPetals(){
+  setInterval(() => {
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.animationDuration = 5 + Math.random() * 4 + 's';
+    petal.style.animationDelay = '0s';
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), 9000);
+  }, 300); // new petal every 0.3s continuously
+}
+
+function showChat(){ 
+  document.getElementById('page1').style.display='none'; 
+  document.getElementById('chatbox').style.display='block'; 
+}
+function showRandom(){ 
+  document.getElementById('page1').style.display='none'; 
+  document.getElementById('randomPage').style.display='block'; 
+  newRandom(); 
+}
+function backToHome(){ 
+  document.getElementById('chatbox').style.display='none'; 
+  document.getElementById('randomPage').style.display='none'; 
+  document.getElementById('page1').style.display='block'; 
+}
+
+// Predefined messages for emotions
+const emotionMessages = {
+  happy:["Keep shining, your joy lights the world.","Your laughter is a melody worth hearing.","Celebrate these little moments of happiness.","Sunlight dances on your spirit — enjoy it."],
+  sad:["Even in shadows, light finds you.","Your feelings are valid, take your time.","Every storm passes; gentle days await.","Reach out to me if you need a listening ear.","Soft rains nurture the roots of tomorrow's blooms."],
+  angry:["Take a breath; your peace matters.","Let calmness flow with each exhale.","You are heard and understood.","Even fierce winds eventually find still skies."],
+  bored:["Seek small wonders around you.","A new idea might spark your day.","Every moment holds tiny joys.","A blank canvas can hold beautiful colors — try imagining."],
+  anxious:["Soft calmness surrounds you.","Step by step, you are safe.","Peace resides within you, even quietly.","Reach out to me if your thoughts feel heavy.","Even the restless sea eventually touches the shore."],
+  tired:["Rest replenishes your spirit.","Take gentle care of yourself.","Allow yourself calm and stillness.","A quiet pause restores the heart and mind."],
+  confused:["Clarity comes with patience.","Every question has a gentle answer.","Trust your instincts, softly.","Reach out to me if you need guidance.","Even tangled threads can weave a beautiful tapestry."],
+  lonely:["You are seen and valued.","Quiet moments hold hidden warmth.","Connections appear in subtle ways.","Reach out to me — I’m here for you.","Stars shine even in the deepest night."],
+  excited:["Cherish this energy, it inspires.","Joyful steps leave gentle trails.","Let your enthusiasm guide small joys.","Like fireflies, your spark illuminates quietly."],
+  frustrated:["Patience helps ease tension.","Each challenge passes in time.","You are stronger than your frustrations.","Reach out to me if the weight feels too heavy.","Storms clear to reveal calm skies."],
+  surprised:["Unexpected moments can delight.","Let curiosity gently guide you.","New experiences bring soft joy.","Every surprise is a small poem of life."],
+  calm:["Your tranquility is a gift.","Peace surrounds you gently.","Savor these moments of stillness.","A soft breeze carries your calmness further."],
+  grateful:["Acknowledging small joys nourishes the heart.","Your gratitude spreads warmth.","Every thankful thought brightens your day.","Cherish these feelings quietly."],
+  love:["Affection and care enrich the soul.","Small gestures hold gentle power.","Your warmth leaves traces of comfort.","Reach out to me when you feel like sharing."]
+};
+
+// 20 random messages for fallback
+const randomMessages = [
+  "Today is a fresh page, you can write anything.",
+  "Gentle moments make the heart light.",
+  "A soft thought can bloom into calm.",
+  "Every day brings tiny miracles.",
+  "Quiet smiles are quietly powerful.",
+  "Even small acts hold gentle strength.",
+  "Moments of peace are precious.",
+  "Seek the soft light in little things.",
+  "Your presence matters more than you know.",
+  "Kind thoughts ripple beyond the moment.",
+  "Each breath is a tiny gift.",
+  "Soft courage shines quietly.",
+  "Gentle laughter heals silently.",
+  "Hope quietly grows in hearts.",
+  "Your calm can inspire others.",
+  "Small joys hold gentle magic.",
+  "Patience nurtures quiet strength.",
+  "Tender care heals quietly.",
+  "The world appreciates your kindness.",
+  "Even the tiniest smile lights a room."
+];
+
+function showEmotionResponse(){
+  const input = document.getElementById('feelingInput').value.toLowerCase();
+  const outputDiv = document.getElementById('chatOutput');
+  outputDiv.innerHTML = '';
+  let messages = emotionMessages[input];
+  if(!messages){ messages = randomMessages; }
+  messages.forEach(msg => {
+    const p = document.createElement('div');
+    p.className='message';
+    p.textContent = msg;
+    outputDiv.appendChild(p);
+  });
+}
+
+function newRandom(){
+  const outputDiv = document.getElementById('randomOutput');
+  const msg = randomMessages[Math.floor(Math.random()*randomMessages.length)];
+  outputDiv.textContent = msg;
+}
+</script>
+
+</body>
+</html>
