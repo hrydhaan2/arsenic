@@ -1,0 +1,609 @@
+<!--Apology to As-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apology to Arsenic</title>
+
+<!-- Dancing Script font -->
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Dancing Script', cursive;
+        overflow-x: hidden;
+        background-color: black;
+        color: beige;
+        height: 100%;
+        font-weight: bold;
+    }
+
+    /* Login page */
+
+    #loginPage {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: black;
+        color: beige;
+    }
+
+    input {
+        padding: 10px;
+        margin: 10px;
+        font-size: 1rem;
+        border: 2px solid #4B2E05;
+        border-radius: 5px;
+        background: #4B2E05;
+        color: beige;
+        font-family: 'Dancing Script', cursive;
+        font-weight: bold;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        background: #4B2E05;
+        color: beige;
+        border: 2px solid beige;
+        border-radius: 8px;
+        font-family: 'Dancing Script', cursive;
+        font-weight: bold;
+    }
+
+    button:hover {
+        background: beige;
+        color: #4B2E05;
+    }
+
+    /* Page 1 */
+
+    #page1 {
+        display: none;
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background: black url('1opening.png') no-repeat center bottom;
+        background-size: contain;
+        overflow: hidden;
+    }
+
+    /* Envelope (coffee parchment box under bouquet) */
+
+    #envelope {
+        width: 150px;
+        height: 90px;
+        background: #4B2E05;
+        position: absolute;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 4px;
+        border: 2px solid beige;
+        cursor: pointer;
+    }
+
+    /* Letters */
+
+    .letter {
+        display: none;
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        max-width: 600px;
+        background: #4B2E05;
+        color: beige;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.7);
+        font-family: 'Dancing Script', cursive;
+        font-weight: bold;
+    }
+
+    .letter button {
+        margin-top: 20px;
+    }
+
+    /* Chatbox / Random Box (coffee parchment boxes) */
+
+    .parchmentBox {
+        display: none;
+        position: absolute;
+        width: 80%;
+        max-width: 600px;
+        background: #4B2E05;
+        padding: 20px;
+        border-radius: 10px;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 0 20px rgba(0,0,0,0.7);
+        color: beige;
+        font-family: 'Dancing Script', cursive;
+        font-weight: bold;
+    }
+
+    .message {
+        margin: 10px 0;
+    }
+
+    /* Petals */
+
+    .petal {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background: pink;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation-name: fall;
+        animation-timing-function: linear;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(0) rotate(0deg); opacity:1;}
+        100% { transform: translateY(600px) rotate(360deg); opacity:0;}
+    }
+
+    /* Buttons */
+
+    #shareBtn, #randomBtn, #backBtn {
+        margin: 10px;
+        padding: 10px 20px;
+    }
+
+    /* Inputs inside parchment boxes */
+
+    #feelingInput {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        background: #4B2E05;
+        color: beige;
+        border: 2px solid beige;
+        border-radius: 5px;
+        font-family: 'Dancing Script', cursive;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Login Page -->
+
+<div id="loginPage">
+    <h1>Welcome</h1>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- Page 1: Envelope & Background -->
+
+<div id="page1">
+    <div id="envelope"></div>
+</div>
+
+<!-- Letters -->
+<div class="letter" id="letter1">
+    <p>Dear Anisha, <br> I'm truly sorry, even though I know that words can't always undo what has been done but this time they are to reassure that nothing undesirable occurs once again. I sincerely apologize for all the given 18 reasons as of 13/12/2025 and the rest which have been talked about.</p>
+    <button onclick="nextLetter(2)">Next</button>
+</div>
+
+<div class="letter" id="letter2">
+    <p>I'm not sure how, but you were my storm shelter; without having to try, you made me feel at ease and as though the world wasn't as heavy as I had assumed. A person gives their all to protect his home and your my home. Till now I said I am trying but now I say I have done the nexessarry. It is about time all the changes come into shape, like a batter in its mould being backed. As we move into a new year, I too move into the new clothes of my personality, for achieving utopia or in others words a simply lovely future with you. We are team we always will be, this is a contract which can't be abolished but can be amended. I have and will give my all for gaurding us and loving us and each other will be the best decision of our lives. The responsibility of the said's implementation is mine and I vow to ensure a mutually loving success of our relationship and do my best for the wellness of us as individuals. I hope you stay, I hope you don't leave me, I hope you see where I brought myself and show me the light instead of being disappointed, I hope you still care about me, I hope I matter to you and I hope you love me.</p>
+    <button onclick="nextLetter(3)">Next</button>
+</div>
+
+<div class="letter" id="letter3">
+    <p>It is no longer just promises based on actions in futures, it is the changes in present to which I have committed to. In this journey your cooperations, investments of time and love, bearings and support are not only essential in the changes but my subsistence as well. With this I also say that my sickening apolgies face a reduction in its number as the errors and flaws start to decline. I love you so much and I know you feel the same and the circumstances raising issues now change. <br>I am sorry and grateful to you, please don't leave me. I love you with my all.<br>With love, <br>Hrydhaan Gaurang Worah</p>
+    <button id="shareBtn" onclick="showOptions()">Share How You Feel</button>
+    <button id="randomBtn" onclick="showRandomPage()">Something Random</button>
+</div>
+
+<!-- Share How You Feel -->
+
+<div class="parchmentBox" id="chatbox">
+    <h2>Share How You Feel</h2>
+    <input type="text" id="feelingInput" placeholder="Type your feeling...">
+    <button onclick="showEmotionResponse()">Submit</button>
+    <div id="chatOutput"></div>
+    <button id="backBtn" onclick="backToHome()">Back</button>
+</div>
+
+<!-- Something Random -->
+
+<div class="parchmentBox" id="randomPage">
+    <h2>Something Random</h2>
+    <div id="randomOutput"></div>
+    <button onclick="newRandom()">Show Another</button>
+    <button onclick="backToHome()">Back</button>
+</div>
+
+<script>
+/* Login */
+
+function login(){
+    const username=document.getElementById('username').value;
+    const password=document.getElementById('password').value;
+    if(username==='10022011' && password==='19022024'){
+        document.getElementById('loginPage').style.display='none';
+        document.getElementById('page1').style.display='block';
+        launchPetalsLogin();
+    } else alert('Invalid credentials!');
+}
+
+/* Petals */
+
+function createPetal(xStart,yStart,targetContainer){
+    const petal=document.createElement('div');
+    petal.className='petal';
+    petal.style.left=xStart+'px';
+    petal.style.top=yStart+'px';
+    petal.style.animationDuration=(3+Math.random()*2)+'s';
+    targetContainer.appendChild(petal);
+    setTimeout(()=>petal.remove(),5000);
+}
+
+let petalInterval;
+function launchPetalsLogin(){
+    const width=window.innerWidth;
+    petalInterval=setInterval(()=>{
+        const x=Math.random()*width;
+        createPetal(x,-20,document.body);
+    },200);
+}
+
+function launchPetalsTextBox(container){
+    const rect=container.getBoundingClientRect();
+    petalInterval=setInterval(()=>{
+        const x=rect.left+Math.random()*rect.width;
+        createPetal(x,rect.top-20,document.body);
+    },300);
+}
+
+function stopPetals(){clearInterval(petalInterval);}
+
+/* Envelope click */
+
+const envelope=document.getElementById('envelope');
+envelope.addEventListener('click',()=>{
+    envelope.style.display='none';
+    document.getElementById('letter1').style.display='block';
+    launchPetalsTextBox(document.getElementById('letter1'));
+    document.getElementById('page1').style.backgroundImage="url('topview.png')";
+});
+
+/* Letter Navigation */
+
+function nextLetter(num){
+    const prev=document.getElementById('letter'+(num-1));
+    const curr=document.getElementById('letter'+num);
+    prev.style.display='none';
+    curr.style.display='block';
+    stopPetals();
+    launchPetalsTextBox(curr);
+}
+
+/* Options */
+
+function showOptions(){
+    stopPetals();
+    document.getElementById('letter3').style.display='none';
+    const chatBox=document.getElementById('chatbox');
+    chatBox.style.display='block';
+    launchPetalsTextBox(chatBox);
+}
+
+function showRandomPage(){
+    stopPetals();
+    document.getElementById('letter3').style.display='none';
+    const randomBox=document.getElementById('randomPage');
+    randomBox.style.display='block';
+}
+
+/* Emotion messages */
+
+const emotionMessages = {
+    happy: {
+        synonyms: [
+            'joy',
+            'delighted',
+            'cheerful',
+            'glad',
+            'content'
+        ],
+        messages: [
+            "Keep shining, your joy lights the world.",
+            "Your laughter is a melody worth hearing.",
+            "Celebrate these little moments of happiness."
+        ]
+    },
+    sad: {
+        synonyms: [
+            'unhappy',
+            'down',
+            'melancholy',
+            'blue',
+            'gloomy'
+        ],
+        messages: [
+            "Even in shadows, light finds you.",
+            "Your feelings are valid.",
+            "Every storm passes."
+        ]
+    },
+    angry: {
+        synonyms: [
+            'mad',
+            'furious',
+            'irritated',
+            'frustrated'
+        ],
+        messages: [
+            "Take a breath; your peace matters.",
+            "Let calmness flow.",
+            "You are heard and understood."
+        ]
+    },
+    bored: {
+        synonyms: [
+            'uninterested',
+            'dull',
+            'weary'
+        ],
+        messages: [
+            "Small sparks of curiosity can ignite delight.",
+            "Perhaps a new hobby could surprise you."
+        ]
+    },
+    anxious: {
+        synonyms: [
+            'nervous',
+            'worried',
+            'uneasy'
+        ],
+        messages: [
+            "Focus on your breath, one step at a time.",
+            "This moment will pass."
+        ]
+    },
+    tired: {
+        synonyms: [
+            'sleepy',
+            'exhausted',
+            'fatigued'
+        ],
+        messages: [
+            "Rest is essential.",
+            "Even a small pause refreshes the spirit."
+        ]
+    },
+    lonely: {
+        synonyms: [
+            'isolated',
+            'alone',
+            'abandoned'
+        ],
+        messages: [
+            "You are not alone.",
+            "Reach out — someone will listen."
+        ]
+    },
+    confused: {
+        synonyms: [
+            'puzzled',
+            'uncertain',
+            'perplexed'
+        ],
+        messages: [
+            "Take a moment; clarity follows.",
+            "Sometimes questions are the doorway to learning."
+        ]
+    },
+    grateful: {
+        synonyms: [
+            'thankful',
+            'appreciative',
+            'blessed'
+        ],
+        messages: [
+            "Your appreciation brightens the heart.",
+            "Gratitude nurtures happiness."
+        ]
+    },
+    hopeful: {
+        synonyms: [
+            'optimistic',
+            'positive',
+            'encouraged'
+        ],
+        messages: [
+            "Light is ahead; hold onto your hope.",
+            "Hope anchors the heart."
+        ]
+    },
+    proud: {
+        synonyms: [
+            'accomplished',
+            'satisfied',
+            'fulfilled'
+        ],
+        messages: [
+            "Celebrate your achievements.",
+            "Take a moment to honor yourself."
+        ]
+    },
+    scared: {
+        synonyms: [
+            'afraid',
+            'frightened',
+            'terrified'
+        ],
+        messages: [
+            "Fear is natural; you are stronger than you think.",
+            "Take small steps forward."
+        ]
+    },
+    relaxed: {
+        synonyms: [
+            'calm',
+            'peaceful',
+            'at ease'
+        ],
+        messages: [
+            "Savor the stillness around you.",
+            "Let tension melt away."
+        ]
+    },
+    surprised: {
+        synonyms: [
+            'astonished',
+            'amazed',
+            'shocked'
+        ],
+        messages: [
+            "Life’s wonders can catch us off guard.",
+            "Embrace the unexpected."
+        ]
+    },
+    frustrated: {
+        synonyms: [
+            'annoyed',
+            'disappointed',
+            'irritated'
+        ],
+        messages: [
+            "Pause and breathe; patience helps.",
+            "Your effort is important."
+        ]
+    },
+    motivated: {
+        synonyms: [
+            'driven',
+            'inspired',
+            'determined'
+        ],
+        messages: [
+            "Your energy is powerful; channel it wisely.",
+            "Keep pushing forward!"
+        ]
+    },
+    calm: {
+        synonyms: [
+            'peaceful',
+            'composed'
+        ],
+        messages: [
+            "Find your center; breathe.",
+            "Peace is within reach."
+        ]
+    },
+    energetic: {
+        synonyms: [
+            'lively',
+            'vibrant'
+        ],
+        messages: [
+            "Channel your energy positively.",
+            "Your spark inspires others."
+        ]
+    },
+    nostalgic: {
+        synonyms: [
+            'sentimental',
+            'wistful'
+        ],
+        messages: [
+            "Cherish sweet memories.",
+            "They shape your beautiful story."
+        ]
+    },
+    bored2: { 
+        synonyms: [
+            'meh',
+            'disinterested'
+        ],
+        messages: [
+            "Maybe try something new today.",
+            "Even small changes can refresh your mood."
+        ]
+    }
+};
+
+function showEmotionResponse(){
+    const input=document.getElementById('feelingInput').value.toLowerCase();
+    let found=false;
+    for(let key in emotionMessages){
+        if(key===input){
+            const msgs=emotionMessages[key].messages;
+            const randomMsg=msgs[Math.floor(Math.random()*msgs.length)];
+            document.getElementById('chatOutput').innerHTML="<b>"+randomMsg+"</b>";
+            found=true;
+            break;
+        }
+    }
+    if(!found) document.getElementById('chatOutput').innerHTML="<b>Thanks for sharing your feelings!</b>";
+}
+
+/* Random messages */
+
+const randomMessages=[
+  "A cat just walked past your window.",
+  "You look amazing today!",
+  "A secret admirer might be near.",
+  "The stars shine just for you tonight.",
+  "Someone will make you smile today.",
+  "Good vibes are heading your way.",
+  "A little surprise is coming soon.",
+  "Your laughter is contagious.",
+  "A warm cup of tea awaits you.",
+  "The wind carries a special message.",
+  "You are stronger than you think.",
+  "A song will brighten your mood.",
+  "Happiness is around the corner.",
+  "Adventure is calling your name.",
+  "A tiny joy will find you.",
+  "Someone appreciates your kindness.",
+  "You are exactly where you need to be.",
+  "A moment of magic is near.",
+  "Smile, the world smiles with you.",
+  "A gentle hug is in your future."
+];
+
+function newRandom(){
+    const msg=randomMessages[Math.floor(Math.random()*randomMessages.length)];
+    document.getElementById('randomOutput').innerHTML="<b>"+msg+"</b>";
+}
+
+/* Back */
+
+function backToHome(){
+    // Stop any ongoing petals
+    stopPetals();
+
+    // Hide both boxes completely
+    document.getElementById('chatbox').style.display = 'none';
+    document.getElementById('randomPage').style.display = 'none';
+
+    // Show the previous letter (Letter 3)
+    document.getElementById('letter3').style.display = 'block';
+
+    // Restart petals for the visible section only
+    launchPetalsTextBox(document.getElementById('letter3'));
+}
+
+</script>
+</body>
+</html>
